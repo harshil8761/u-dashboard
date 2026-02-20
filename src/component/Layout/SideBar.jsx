@@ -17,7 +17,7 @@ const SideBar = ({open,mobileOpen}) => {
   const { logout } = useContext(AuthContext);
 
   return (
-    <aside className={`fixed xl:static xl:top-0 top-16 p-5 left-0 h-screen ${open ? "w-60" : "w-20"} bg-white shadow-lg z-40 overflow-y-auto transform transition-all duration-500 ease-in-out ${mobileOpen ? "translate-x-0": "-translate-x-full"} xl:translate-x-0`}>
+    <aside className={`fixed xl:static p-5 left-0 h-screen ${open ? "w-60" : "w-20"} bg-white shadow-lg z-40 overflow-y-auto transform transition-all duration-500 ease-in-out ${mobileOpen ? "translate-x-0": "-translate-x-full"} xl:translate-x-0`}>
       <nav className='space-y-3 '>
         {
           menu.map((item,index) => {
