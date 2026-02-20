@@ -1,5 +1,6 @@
 import { createContext, useCallback, useMemo, useState } from "react";
 import { Products } from "../assets/ProductData";
+import { toast } from "react-toastify";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const CartContext = createContext();
@@ -16,36 +17,48 @@ export const CartProvider = ({ children }) => {
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         );
+      } else {
+        toast.success("Item Added");
+        return [...prev, { ...product, quantity: 1 }];
       }
-      return [...prev, { ...product, quantity: 1 }];
     });
-  },[]);
+  }, []);
 
   const removeItem = useCallback((id) => {
     setCartItems((prev) => {
-      return prev.filter(item => item.id !== id)
-    })
-  },[])
+      return prev.filter((item) => item.id !== id);
+    });
+    toast.warning("Item Deleted");
+  }, []);
 
-  const inc = useCallback((id) =>
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+  const inc = useCallback(
+    (id) =>
+      setCartItems((prev) =>
+        prev.map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+        ),
       ),
-  ),[]);
+    [],
+  );
 
-  const dec = useCallback((id) =>
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item,
+  const dec = useCallback(
+    (id) =>
+      setCartItems((prev) =>
+        prev.map((item) =>
+          item.id === id && item.quantity > 1
+            ? { ...item, quantity: item.quantity - 1 }
+            : item,
+        ),
       ),
-  ),[]);
+    [],
+  );
 
   const getCartTotal = useMemo(() => {
-      return cartItems.reduce((total,item) => total + item.price * item.quantity,0)
-  },[cartItems])
-
-
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0,
+    );
+  }, [cartItems]);
 
   const value = {
     addToCart,
