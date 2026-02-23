@@ -87,10 +87,11 @@ const Register = () => {
             Register
           </button>
           <p className="text-center">
-            Already Register Login now
-            <Link to="/" className="text-blue-600">
+            Already Register{" "} 
+             <Link to="/" className="text-blue-600">
               Login
-            </Link>
+            </Link>{" "}  
+             Now
           </p>
         </form>
       </div>
