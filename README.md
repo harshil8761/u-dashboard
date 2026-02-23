@@ -47,4 +47,4 @@ A fully functional E-Commerce Dashboard built using React.js with authentication
 
 ---
 
-## 📂 Project Structure
+
